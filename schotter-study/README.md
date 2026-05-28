@@ -1,0 +1,1 @@
+beschreibt die erste studie "schotter"
