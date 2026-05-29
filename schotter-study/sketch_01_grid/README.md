@@ -1,10 +1,10 @@
 # 01 Grid
 
-This sketch establishes the starting point for the Schotter study.
+This sketch establishes the geometric foundation for the Schotter study.
 
 At this stage the system is completely ordered. No randomness, rotation, or displacement is applied. Every execution produces exactly the same result.
 
-The image is not created by manually placing individual squares. Instead, a simple set of rules generates the entire structure. This principle will remain unchanged throughout the study, while the rules themselves gradually evolve.
+Rather than manually placing individual squares, the image is generated from a simple set of rules. This approach forms the basis of the entire study. Future stages will introduce variations and disturbances, while the underlying system remains largely unchanged.
 
 ## Technical Notes
 
@@ -14,7 +14,7 @@ The grid is generated using nested `for` loops.
 
 The outer loop iterates over the rows, while the inner loop iterates over the columns.
 
-This was a deliberate choice. Since the original artwork develops row by row, this structure makes it easy to introduce increasing disorder in later studies.
+This is a deliberate design choice. Since disorder in *Schotter* increases row by row, the structure makes it easy to apply changes to complete rows in later studies.
 
 ### Center-Based Coordinates
 
@@ -24,13 +24,21 @@ The sketch uses:
 rectMode(CENTER);
 ```
 
-Squares are therefore positioned by their center point rather than their upper-left corner.
+Each square is positioned by its center point rather than by its upper-left corner.
 
-This simplifies later transformations, especially rotation, because a square can rotate around its own center without requiring additional position calculations.
+This simplifies future transformations, especially rotation, because every square can rotate around its own center without requiring additional position calculations.
+
+### Visualizing the Center
+
+A point is drawn at the center of every square.
+
+These markers are not intended as part of the final artwork. Instead, they make the underlying structure visible and help illustrate how the system is built.
+
+The center points will become increasingly important in later stages when squares begin to rotate, shift, and break away from the original grid.
 
 ### Adjustable Parameters
 
-Several aspects of the grid are defined as constants:
+The main properties of the grid are defined as constants:
 
 - number of rows
 
@@ -40,18 +48,18 @@ Several aspects of the grid are defined as constants:
 
 - outer margin
 
-This keeps the structure flexible and makes future experiments easier.
+This makes the system easy to modify and encourages experimentation.
 
 ### Automatic Image Export
 
-The sketch automatically saves an image of the generated result.
+The generated image is automatically saved to disk.
 
-This allows every stage of the study to be documented and compared as the system evolves.
+Documenting every stage of the study makes it easier to compare results and follow the gradual evolution of the system.
 
 ## Why This Step Matters
 
-The goal of this sketch is not to reproduce *Schotter* itself.
+The purpose of this sketch is not to recreate *Schotter* itself.
 
-Instead, it establishes a stable and predictable system from which controlled disorder can emerge in later stages.
+Instead, it establishes a stable geometric structure from which controlled disorder can emerge.
 
 Before a structure can be disturbed, it must first exist.
