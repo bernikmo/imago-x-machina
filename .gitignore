@@ -17,3 +17,6 @@ Thumbs.db
 application.windows64/
 application.linux64/
 application.macosx/
+
+# Notes
+notes/
