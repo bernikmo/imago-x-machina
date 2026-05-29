@@ -7,6 +7,8 @@ final float SIZE = 50;
 
 final float MARGIN = 100;
 
+final String FILENAME = "output/01_grid.png";
+
 
 void setup() {
     size(750, 1250);
@@ -22,10 +24,15 @@ void setup() {
 
     for (int row = 0; row < ROWS; row++) {
         for (int column = 0; column < COLUMNS; column++) {
+            
             float centerX = column * SIZE;
             float centerY = row * SIZE;
+            
+            // center
+            point(centerX, centerY);
+            // stone
             rect(centerX, centerY, SIZE, SIZE);
         }
     }
-    saveFrame("01_grid.png");
+    saveFrame(FILENAME);
 }
