@@ -27,7 +27,7 @@ void setup() {
     strokeWeight(1);
     noFill();    
 
-    // create all trait arrays
+    // create origin, disturbance, and disturbed states
     int i = 0;
     for (int row = 0; row < ROWS; row++) {
         for (int column = 0; column < COLUMNS; column++) {
@@ -35,19 +35,19 @@ void setup() {
             // origin
             float originX   = column * SIZE;
             float originY   = row * SIZE;
-            float originRot = 0;
+            float originAngle = 0;
 
             // random disturbance
-            float randDisturbanceX   = row * random(-MAX_MOVE_X, MAX_MOVE_X);
-            float randDisturbanceY   = row * random(0, MAX_MOVE_Y);
+            float randDisturbanceX     = row * random(-MAX_MOVE_X, MAX_MOVE_X);
+            float randDisturbanceY     = row * random(0, MAX_MOVE_Y);
             float randDisturbanceAngle = row * random(-MAX_ROT, MAX_ROT);
 
             // disturbed state
             float disturbedX   = originX + randDisturbanceX;
             float disturbedY   = originY + randDisturbanceY;
-            float disturbedRot = originRot + randDisturbanceAngle;
+            float disturbedRot = originAngle + randDisturbanceAngle;
 
-            origins[i]      = new Pose(originX, originY, originRot);
+            origins[i]      = new Pose(originX, originY, originAngle);
             disturbances[i] = new Pose(randDisturbanceX, randDisturbanceY, randDisturbanceAngle);
             disturbed[i]    = new Pose(disturbedX, disturbedY, disturbedRot);
 
