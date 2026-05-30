@@ -1,94 +1,81 @@
-# 02 Scatter
+# 03 Interactive
 
-This study introduces the first controlled disturbances into the grid.
+This study transforms the previous static sketch into an interactive system.
 
-The structure from the previous stage remains intact, but the squares are no longer perfectly aligned. Small positional shifts and rotations are applied, with the amount of variation increasing from row to row.
+The visual result is still based on the same principle introduced in the previous stage: a regular grid receives row-dependent disturbances in position and rotation. However, the focus of this sketch is no longer the image itself, but the structure of the program behind it.
 
-The result is a system that still appears ordered, yet already shows signs of instability.
+A mouse click generates a new variation of the composition, while the original grid remains unchanged.
 
-## Design Decision
+Press **`s`** to save the current image.
 
-While implementing this stage, two possible approaches emerged:
+## Motivation
 
-### Option 1
+The previous studies generated a single image and then terminated.
 
-Calculate individual positions and rotations for every square and draw each shape directly at its final location.
+For future experiments, I wanted to explore the generated states interactively and eventually control the amount of disorder in real time.
 
-### Option 2
+This required a larger restructuring of the code.
 
-Draw every square at the origin and use transformations to position and rotate it.
+Instead of calculating and drawing everything in a single step, the system now separates different states and stores them explicitly.
 
-This study follows the second approach.
+## Three States
 
-A rectangle has a position, but no built-in rotation. Processing, however, provides transformations such as `translate()` and `rotate()`, making it natural to move and rotate the drawing space instead of manually calculating rotated geometry.
+The sketch introduces three independent collections of data:
 
-Following the KISS principle, this approach proved both simpler and easier to extend.
+### Origins
 
-## Transformations
+The original ordered grid.
 
-Each square is drawn at the local origin:
+Every square has a fixed position and orientation.
 
-```java
-rect(0, 0, SIZE, SIZE);
-```
+### Disturbances
 
-The drawing context is then transformed using:
+The randomly generated offsets and rotations.
 
-```java
-translate(...)
-rotate(...)
-```
+These values represent the disturbance itself.
 
-The transformations are isolated using:
+### Disturbed
 
-```java
-pushMatrix();
-...
-popMatrix();
-```
+The result of applying the disturbances to the original grid.
 
-This ensures that every square receives its own independent transformation.
+These are the values currently used for drawing.
 
-## Controlled Disorder
+This separation may appear more complex than the previous implementation, but it makes the underlying process easier to understand and prepares the code for future interactive experiments.
 
-The amount of disorder depends on the current row.
+## Interactivity
 
-Squares in the upper rows remain close to their original positions, while squares in lower rows receive increasingly larger shifts and rotations.
+Clicking the mouse generates a new set of disturbances.
 
-This creates a gradual transition from order to disorder rather than an abrupt change.
+The original grid remains unchanged, while new disturbed states are calculated and displayed.
 
-## Direction of Movement
+This allows rapid exploration of different variations without modifying the underlying structure.
 
-The horizontal displacement is intentionally smaller than the vertical displacement.
+## Deliberate Code Duplication
 
-In addition, vertical movement is restricted to positive values only.
+Some code duplication is already visible in this sketch.
 
-As a result, the squares appear to settle downward, suggesting the behaviour of scattered or falling material rather than random motion in all directions.
+For example, the generation of random disturbances appears in more than one place.
 
-## Changes Compared to 01 Grid
+Normally this could be extracted into helper functions.
 
-- introduced positional shifts
+In this study, however, the duplication remains intentionally.
 
-- introduced rotation
-
-- implemented transformation-based drawing
-
-- added `pushMatrix()` and `popMatrix()`
-
-- renamed `centerX` and `centerY` to `shiftX` and `shiftY`
-
-- moved drawing operations to the local origin `(0, 0)`
-
-- removed `point()`
-
-- added configurable limits for randomness
-
-- adjusted canvas size and square size to accommodate the growing disorder
+At this stage clarity is considered more important than abstraction. Keeping the logic visible makes it easier to understand how the system evolves and simplifies experimentation while the design is still changing.
 
 ## Observation
 
-The grid is still clearly recognizable.
+A new idea emerges in this version:
 
-However, the system no longer feels perfectly stable.
+The disturbance itself becomes a first-class element of the system.
 
-At this stage, the essential mechanism of Schotter is already present: order gradually dissolves into disorder.
+Rather than immediately applying randomness to the grid, the sketch stores and manages disturbances as their own state.
+
+This distinction may seem subtle, but it becomes important when exploring how much disorder should be applied and how it can be controlled interactively.
+
+## Looking Ahead
+
+The next study will use this structure to investigate a different question:
+
+What happens when disturbances are generated once, but only partially applied?
+
+Instead of creating new randomness, the amount of existing disorder will become controllable in real time.
