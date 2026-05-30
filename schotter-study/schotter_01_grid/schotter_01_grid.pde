@@ -1,4 +1,4 @@
-// sketch_01_grid.pde
+// schotter_01_grid.pde
 
 
 final int ROWS = 22;
@@ -7,7 +7,7 @@ final float SIZE = 50;
 
 final float MARGIN = 100;
 
-final String FILENAME = "output/01_grid.png";
+final String FILENAME = "output/schotter_01_grid.png";
 
 
 void setup() {
